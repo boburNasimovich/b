@@ -1,0 +1,875 @@
+:root {
+  /* Asosiy ranglar turg'un qoladi */
+  --surface: #ffffff;       /* Kartochkalar foni hamisha oppoq bo'lib ajralib turadi */
+  --surface-2: #eef1f6;
+  --border: rgba(255, 255, 255, 0.05);
+  --text: #ffffff;          /* Matnlar to'q rangda */
+  --muted: #ffffff;
+  
+  --orange: #ff7a1a;
+  --yellow: #ffd23f;
+  --red: #e23636;
+  
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* Butun ekran foni 40 soniyada 4 ta rangni aylanib chiqadi (har biri ~10 sek) */
+body {
+  font-family: "Inter", -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  animation: dynamicBackground 40s infinite ease-in-out;
+}
+
+/* 3 ta monitordagi stage foni ham bir xil o'zgarishi uchun */
+.full-stage {
+  animation: dynamicBackground 40s infinite ease-in-out;
+}
+
+/* O'zgaruvchan fon ranglari algoritmi */
+@keyframes dynamicBackground {
+  0%, 100% {
+    background-color: #000000; /* 1-rang: Yorqin toza kulrang */
+  }
+  25% {
+    background-color: #ffd23f; /* 2-rang: Premium issiq krem foni */
+  }
+  50% {
+    background-color: #000000; /* 3-rang: Ishtahani ochuvchi juda och shaftoli/mandarin */
+  }
+  75% {
+    background-color: #ffd23f; /* 4-rang: Nafis och havorang simfoniyasi */
+  }
+}
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.font-display {
+  font-family: "Bebas Neue", "Inter", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+/* ============ CONTROL PANEL (BOSH SAHIFA) ============ */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--gradient-hero);
+  display: grid;
+  place-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 26px;
+  color: white;
+  box-shadow: var(--glow);
+}
+
+.brand-name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 26px;
+  line-height: 1;
+}
+
+.brand-name span { color: var(--yellow); }
+
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.clock {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+  color: var(--cream);
+}
+
+.clock .sec { color: var(--yellow); }
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  font-size: 12px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #22c55e;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.9); }
+}
+
+/* ============ HERO SECTION ============ */
+.hero {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 32px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.hero-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(226, 54, 54, 0.4);
+  color: var(--yellow);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 64px;
+  line-height: 0.95;
+  margin-top: 12px;
+}
+
+.text-gradient {
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero p {
+  margin-top: 16px;
+  color: var(--muted);
+  max-width: 520px;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-actions a {
+  padding: 14px 18px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.hero-actions a:hover {
+  background: var(--gradient-hero);
+  color: white;
+  box-shadow: var(--glow);
+}
+
+/* ============ MONITOR PREVIEW GRID (BOSH SAHIFA) ============ */
+.monitors {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1280px) {
+  .monitors { grid-template-columns: repeat(3, 1fr); }
+}
+
+.frame-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.frame-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.frame-label .left { display: flex; gap: 8px; align-items: center; }
+
+.frame-label .live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: pulse 1.5s infinite;
+}
+
+.frame {
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 12px;
+  box-shadow: var(--shadow);
+}
+
+.screen {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gradient-screen);
+  position: relative;
+}
+
+.stand {
+  width: 96px;
+  height: 8px;
+  background: var(--surface-2);
+  border-radius: 999px;
+  margin: 12px auto 0;
+}
+
+.stand-base {
+  width: 160px;
+  height: 4px;
+  background: rgba(28, 28, 40, 0.6);
+  border-radius: 999px;
+  margin: 4px auto 0;
+}
+
+/* ============ KAFE EKRANI ICHKI ELEMENTLARI ============ */
+.screen-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  background: var(--gradient-screen);
+  color: var(--text);
+}
+
+.screen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(226, 54, 54, 0.9);
+  backdrop-filter: blur(6px);
+  flex-shrink: 0;
+}
+
+.screen-header .center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.screen-header .pill {
+  background: rgba(226, 54, 54, 0.2);
+  color: var(--yellow);
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.screen-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 20px;
+  color: var(--cream);
+  line-height: 1.1;
+}
+
+.screen-subtitle {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.screen-mark { display: flex; align-items: center; gap: 6px; }
+
+.screen-mark .m-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--gradient-hero);
+  display: grid;
+  place-items: center;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 14px;
+  color: white;
+}
+
+.screen-mark .m-name { font-family: "Bebas Neue", sans-serif; font-size: 16px; }
+.screen-mark .m-name span { color: var(--yellow); }
+
+.grid-area {
+  flex: 1;
+  padding: 10px;
+  display: grid;
+  gap: 8px;
+  min-height: 0;
+}
+
+.grid-4x2 { grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); }
+.grid-3x3 { grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+
+/* ============ MENU CARD STYLES (RASM TO'LIQ CARDNI EGALLAYDI) ============ */
+.menu-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  min-height: 0;
+  height: 100%;
+}
+
+.menu-card .img-wrap {
+  position: absolute; /* Rasm kartaning butun orqa fonini egallaydi */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: none; /* Qora orqa fon olib tashlandi */
+  z-index: 1;
+}
+
+.menu-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Rasmni proporsional ravishda cho'zmasdan yoyadi */
+  display: block;
+}
+
+/* Yozuvlar yaxshi ko'rinishi uchun professional qora gradient soya */
+.menu-card .img-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Matnlar joylashuvi (Pastki qismda rasm ustida shaffof holatda) */
+.menu-card .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  z-index: 3;
+}
+
+.menu-card .name {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 14px;
+  color: var(--cream);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.95); /* Matn orqasida qo'shimcha soya */
+}
+
+.menu-card .price {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 16px;
+  color: var(--yellow);
+  line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.95);
+}
+
+.menu-card .badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: var(--yellow);
+  color: #2a1a00;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 4;
+}
+
+/* 3-Monitor bo'limlari */
+.cat-section { display: flex; flex-direction: column; gap: 4px; min-height: 0; flex: 1; }
+.cat-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 14px;
+  color: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 2px;
+  display: flex;
+  justify-content: space-between;
+}
+.cat-title .count { font-size: 9px; color: var(--muted); }
+.cat-grid { display: grid; gap: 6px; flex: 1; min-height: 0; }
+.cat-grid.cols-5 { grid-template-columns: repeat(5, 1fr); }
+.cat-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* REKLAMA SATRI */
+.marquee {
+  flex-shrink: 0;
+  border-top: 1px solid var(--border);
+  background: rgba(226, 54, 54, 0.9);
+  padding: 4px 0;
+  overflow: hidden;
+}
+.marquee-track {
+  display: inline-flex;
+  gap: 32px;
+  white-space: nowrap;
+  animation: scroll 40s linear infinite;
+}
+.marquee-track span {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 13px;
+  color: white;
+}
+@keyframes scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-33.33%); }
+}
+
+/* FOOTER STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+@media (min-width: 768px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stat { background: var(--bg); padding: 24px; }
+.stat-k {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 36px;
+  background: var(--gradient-hero);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.stat-v { font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-top: 4px; }
+footer.foot { border-top: 1px solid var(--border); padding: 24px; text-align: center; color: var(--muted); font-size: 12px; }
+
+
+/* ============ 📺 TELEVIZOR MONITORI UCHUN MAXSUS TO'LIQ EKRAN REJIMLARI ============ */
+.full-stage {
+  padding-top: 40px;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
+  display: flex;
+}
+
+.full-stage .screen-inner {
+  flex: 1;
+  height: calc(100vh - 40px) !important;
+  max-height: calc(100vh - 40px) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden !important;
+}
+
+.full-stage .screen-header { padding: 16px 24px !important; }
+.full-stage .screen-title { font-size: 38px !important; }
+.full-stage .screen-subtitle { font-size: 14px !important; }
+.full-stage .screen-mark .m-logo { width: 36px !important; height: 36px !important; font-size: 22px !important; }
+.full-stage .screen-mark .m-name { font-size: 24px !important; }
+.full-stage .clock { font-size: 28px !important; }
+
+.full-stage .grid-area {
+  padding: 24px !important;
+  gap: 20px !important;
+  flex: 1 !important;
+  min-height: 0 !important;
+}
+
+.full-stage .grid-4x2 {
+  grid-template-columns: repeat(4, 1fr) !important;
+  grid-template-rows: repeat(2, 1fr) !important;
+}
+.full-stage .grid-3x3 {
+  grid-template-columns: repeat(3, 1fr) !important;
+  grid-template-rows: repeat(3, 1fr) !important;
+}
+
+/* TV rejimida yozuvlar hajmini kattalashtirish */
+.full-stage .menu-card .info {
+  padding: 18px 20px !important;
+  gap: 6px !important;
+}
+.full-stage .menu-card .name { font-size: 26px !important; }
+.full-stage .menu-card .price { font-size: 34px !important; font-weight: bold; }
+.full-stage .menu-card .badge { font-size: 16px !important; padding: 4px 12px !important; top: 12px; left: 12px; }
+.full-stage .marquee { padding: 12px 0 !important; }
+.full-stage .marquee-track span { font-size: 22px !important; }
+
+.full-stage .cat-title { font-size: 22px !important; padding-bottom: 6px !important; }
+.full-stage .cat-title .count { font-size: 14px !important; }
+
+/* Boshqaruv paneli topbari */
+.full-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 16px;
+  background: rgba(11, 11, 15, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  height: 40px;
+  opacity: 0.15;
+  transition: opacity 0.3s ease;
+}
+.full-bar:hover { opacity: 1; }
+
+.full-bar a { color: var(--muted); text-decoration: none; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; }
+.full-bar a:hover { color: var(--cream); }
+.tabs { display: flex; gap: 8px; }
+.tabs a { padding: 4px 12px; border-radius: 6px;  border: 1px solid var(--border); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; }
+.tabs a.active { background: var(--gradient-hero); color: white; border-color: transparent; }
+
+/* ============ MONITOR TANLASH MENYUSI STYLES ============ */
+.monitor-selector-container {
+  max-width: 1600px;
+  margin: 20px auto 0;
+  padding: 0 24px;
+}
+.selector-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+.selector-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+.btn-select {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  padding: 16px 20px;
+  border-radius: 14px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+.btn-select .btn-num {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 32px;
+  color: var(--orange);
+  line-height: 1;
+}
+.btn-select .btn-txt {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 18px;
+  color: var(--cream);
+  letter-spacing: 0.05em;
+}
+.btn-select:hover {
+  border-color: var(--orange);
+  background: var(--surface-2);
+  transform: translateY(-2px);
+  box-shadow: var(--glow);
+}
+.btn-select.m-1:hover .btn-num { color: var(--yellow); }
+.btn-select.m-2:hover .btn-num { color: #22c55e; }
+.btn-select.m-3:hover .btn-num { color: var(--red); }
+
+
+/* ============ 3-MONITOR (ZAMONAVIY TO'LIQ RASTER TIZIMI) ============ */
+.monitor3-three-columns {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 16px !important;
+  height: 100% !important;
+}
+
+.m3-col {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.m3-vertical-grid {
+  display: grid !important;
+  gap: 10px !important;
+  flex: 1 !important;
+}
+
+.m3-vertical-grid.spec-h {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: repeat(5, 1fr) !important;
+}
+
+.m3-vertical-grid.spec-p {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: repeat(3, 1fr) !important;
+}
+
+.m3-vertical-grid.spec-g {
+  grid-template-columns: 1fr !important;
+  grid-template-rows: repeat(3, 1fr) !important;
+}
+
+/* 3-monitordagi kartochkalarni ham umumiy rasmda ko'rsatilganidek to'liq fonli rejimga moslashtirdik */
+.m3-vertical-grid .menu-card {
+  position: relative !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  height: 100% !important;
+}
+
+.m3-vertical-grid .menu-card .img-wrap {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  flex: none !important;
+}
+
+.m3-vertical-grid .menu-card .info {
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  padding: 8px 10px !important;
+  background: transparent !important;
+}
+
+/* 3-monitordagi TV rejimi o'lchamlari */
+.full-stage .m3-vertical-grid .menu-card .name {
+  font-size: 24px !important;
+}
+.full-stage .m3-vertical-grid .menu-card .price {
+  font-size: 30px !important;
+}
+/* ============ 🎬 JONLI MONITOR ANIMATSIYALARI ============ */
+
+/* 1. Rasmlar sekin yaqinlashib-uzoq hissi (Ken Burns effekti) */
+.menu-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* Animatsiyani uzluksiz, bir xil maromda aylanishi uchun sozlaymiz */
+  animation: liveImageMovement 12s ease-in-out infinite alternate;
+}
+
+@keyframes liveImageMovement {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.12); /* Rasm sekingina yaqinlashadi */
+  }
+}
+
+/* 2. Har bir kartani bir oz farqli vaqtda harakatlantirish (Tabiiylik uchun) */
+/* Har bir juft va toq elementlar har xil animatsiya davomiyligiga ega bo'ladi */
+.menu-card:nth-child(even) img {
+  animation-duration: 5s;
+  animation-delay: 1s;
+}
+
+.menu-card:nth-child(3n) img {
+  animation-duration: 5s;
+  animation-direction: alternate-reverse;
+}
+
+/* 3. Yangi va Xit (Badge) belgilarini pulsatsiyalanuvchi (yonib-o'chuvchi) qilish */
+.menu-card .badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: var(--yellow);
+  color: #2a1a00;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  z-index: 4;
+  /* Jonli nur taratish effekti */
+  animation: badgeGlow 2s infinite alternate;
+}
+
+@keyframes badgeGlow {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 4px var(--yellow);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--yellow); /* Atrofga nur taratadi */
+  }
+}
+
+/* TV rejimida ham badgelar chiroyli pulsatsiya qilishi uchun */
+.full-stage .menu-card .badge {
+  font-size: 16px !important;
+  padding: 4px 12px !important;
+  top: 12px;
+  left: 12px;
+}
+
+/* 4. Orqa fondagi shaffof gradientni ham sekin harakatlantirish */
+.menu-card .img-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+  animation: gradientPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes gradientPulse {
+  0% { opacity: 0.85; }
+  100% { opacity: 0.98; }
+}
+/* ============ 🌟 RANDOM "JONLI EKRAN" NUR EFFEKTI ============ */
+
+/* Kartochkaga nur effekti chiqib ketishi uchun zamin tayyorlaymiz */
+.menu-card {
+  position: relative;
+  overflow: hidden; /* Nur kartadan tashqariga chiqib ketmasligi uchun */
+}
+
+/* Kartaning ustiga pseudo-element orqali yorqin nur chizig'ini joylashtiramiz */
+.menu-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%; /* Dastlab nur chap tomonda yashirin turadi */
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.6), /* Yorqin oq nur chizig'i */
+    transparent
+  );
+  transform: skewX(-25deg); /* Nur qiya bo'lib o'tishi uchun */
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* Har bir kartaga turlicha (random) vaqtlar va kechikishlar beramiz */
+/* 1, 5-kartalar: har 12 soniyada bir marta tezda nur o'tadi */
+.menu-card:nth-child(4n+1)::after {
+  animation: randomGlint 12s infinite ease-in-out;
+  animation-delay: 1s;
+}
+
+/* 2, 6-kartalar: har 17 soniyada (boshqa vaqtda chaqnaydi) */
+.menu-card:nth-child(4n+2)::after {
+  animation: randomGlint 17s infinite ease-in-out;
+  animation-delay: 5s;
+}
+
+/* 3, 7-kartalar: har 22 soniyada */
+.menu-card:nth-child(4n+3)::after {
+  animation: randomGlint 22s infinite ease-in-out;
+  animation-delay: 3s;
+}
+
+/* 4, 8-kartalar: har 14 soniyada */
+.menu-card:nth-child(4n+4)::after {
+  animation: randomGlint 14s infinite ease-in-out;
+  animation-delay: 8s;
+}
+
+/* Nur o'tish harakati (0% dan 15% gacha tezda o'tadi, qolgan vaqtda kutiladi) */
+@keyframes randomGlint {
+  0% {
+    left: -150%;
+  }
+  15% {
+    left: 150%; /* Nur chapdan o'ngga tezda yugurib o'tadi */
+  }
+  100% {
+    left: 150%; /* Qolgan katta vaqt davomida nur ko'rinmay turadi (tasodifiy kutish effekti) */
+  }
+}
+
+/* ============================================================= */
+/* ============ 1-MONITOR RANDOM ALMASHINUV ANIMATSIYASI ============ */
+.menu-card {
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.menu-card.card-swapping {
+  opacity: 0;
+  transform: scale(0.94);
+}

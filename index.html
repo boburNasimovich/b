@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BIGBURGER — Kafe Monitor Boshqaruvi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">B</div>
+      <div>
+        <div class="brand-name">BIG<span>BURGER</span></div>
+        <div class="brand-sub">Monitor Control Center</div>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div style="text-align:right;">
+        <div class="brand-sub">Filial · Chilonzor</div>
+        <div class="clock" data-clock>--:--</div>
+      </div>
+      <span class="status-pill">
+        <span class="dot"></span>
+        3 / 3 monitor onlayn
+      </span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <span class="hero-tag">Live Control</span>
+      <h1>
+        TV MONITORLARNI DOSHBOARDDAN <br />
+        <span class="text-gradient">TANLANG VA OCHING</span>
+      </h1>
+      <p>
+        Qaysi monitorni ishga tushirmoqchisiz? Quyidagi maxsus tugmalardan birini tanlang. 
+        Tanlangan monitor alohida oynada to'liq ekran (Fullscreen) rejimida ochiladi.
+      </p>
+    </div>
+  </section>
+
+  <div class="monitor-selector-container">
+    <h2 class="selector-title">Alohida ochish uchun monitorni tanlang:</h2>
+    <div class="selector-buttons">
+      <a href="monitor.html?id=1" class="btn-select m-1">
+        <span class="btn-num">01</span>
+        <span class="btn-txt">LAVASH MONYUSI (4x2 Grid)</span>
+      </a>
+      <a href="monitor.html?id=2" class="btn-select m-2">
+        <span class="btn-num">02</span>
+        <span class="btn-txt">BURGERLAR MENYUSI (3x3 Grid)</span>
+      </a>
+      <a href="monitor.html?id=3" class="btn-select m-3">
+        <span class="btn-num">03</span>
+        <span class="btn-txt">HOT-DOG, PITSA, GAZAKLAR</span>
+      </a>
+    </div>
+  </div>
+
+  <section class="monitors">
+    <div class="frame-wrap">
+      <div class="frame-label">
+        <div class="left"><span class="live-dot"></span><span>Monitor 01 · Lavash</span></div>
+        <span>16:9 · PREVIEW</span>
+      </div>
+      <div class="frame">
+        <div class="screen" data-monitor-preview="1"></div>
+        <div class="stand"></div>
+        <div class="stand-base"></div>
+      </div>
+    </div>
+
+    <div class="frame-wrap">
+      <div class="frame-label">
+        <div class="left"><span class="live-dot"></span><span>Monitor 02 · Burgerlar</span></div>
+        <span>16:9 · PREVIEW</span>
+      </div>
+      <div class="frame">
+        <div class="screen" data-monitor-preview="2"></div>
+        <div class="stand"></div>
+        <div class="stand-base"></div>
+      </div>
+    </div>
+
+    <div class="frame-wrap">
+      <div class="frame-label">
+        <div class="left"><span class="live-dot"></span><span>Monitor 03 · Mix</span></div>
+        <span>16:9 · PREVIEW</span>
+      </div>
+      <div class="frame">
+        <div class="screen" data-monitor-preview="3"></div>
+        <div class="stand"></div>
+        <div class="stand-base"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    © BIGBURGER Monitor System · Monitor boshqaruv tizimi 2026
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
