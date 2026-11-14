@@ -827,41 +827,7 @@ footer.foot { border-top: 1px solid var(--border); padding: 24px; text-align: ce
 
 /* Har bir kartaga turlicha (random) vaqtlar va kechikishlar beramiz */
 /* 1, 5-kartalar: har 12 soniyada bir marta tezda nur o'tadi */
-.menu-card:nth-child(4n+1)::after {
-  animation: randomGlint 12s infinite ease-in-out;
-  animation-delay: 1s;
-}
-
-/* 2, 6-kartalar: har 17 soniyada (boshqa vaqtda chaqnaydi) */
-.menu-card:nth-child(4n+2)::after {
-  animation: randomGlint 17s infinite ease-in-out;
-  animation-delay: 5s;
-}
-
-/* 3, 7-kartalar: har 22 soniyada */
-.menu-card:nth-child(4n+3)::after {
-  animation: randomGlint 22s infinite ease-in-out;
-  animation-delay: 3s;
-}
-
-/* 4, 8-kartalar: har 14 soniyada */
-.menu-card:nth-child(4n+4)::after {
-  animation: randomGlint 14s infinite ease-in-out;
-  animation-delay: 8s;
-}
-
-/* Nur o'tish harakati (0% dan 15% gacha tezda o'tadi, qolgan vaqtda kutiladi) */
-@keyframes randomGlint {
-  0% {
-    left: -150%;
-  }
-  15% {
-    left: 150%; /* Nur chapdan o'ngga tezda yugurib o'tadi */
-  }
-  100% {
-    left: 150%; /* Qolgan katta vaqt davomida nur ko'rinmay turadi (tasodifiy kutish effekti) */
-  }
-}
+  
 
 /* ============================================================= */
 /* ============ 1-MONITOR RANDOM ALMASHINUV ANIMATSIYASI ============ */

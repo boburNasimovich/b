@@ -83,14 +83,16 @@ function monitor1() {
   `;
 }
 
-// MONITOR 2 — BURGER (3x3)
+// MONITOR 2 — BURGERLAR (4x2 dinamik almashinuv)
 function monitor2() {
   var cat = window.MENU.burger;
+  var initialVisible = cat.items.slice(0, 8);
+
   return `
     <div class="screen-inner">
       ` + headerHTML(cat.title, cat.subtitle, "MONITOR 02") + `
-      <div class="grid-area grid-3x3">
-        ` + cat.items.map(cardHTML).join("") + `
+      <div class="grid-area grid-4x2" data-dynamic-grid="monitor2">
+        ` + initialVisible.map(cardHTML).join("") + `
       </div>
       ` + marqueeHTML() + `
     </div>
@@ -111,36 +113,27 @@ function monitor3() {
   `;
 }
 
-// 1-monitor uchun ortib qolgan taomlarni har 6 soniyada random katak bilan almashtirish
-function initDynamicMonitor1() {
-  var grids = document.querySelectorAll('[data-dynamic-grid="monitor1"]');
-  if (!grids.length) return;
-
-  var l = window.MENU.lavash.items;
-  var h = window.MENU.hotdog.items;
-  var p = window.MENU.pitsa.items;
-  var allItems = l.concat(h).concat(p);
-
-  if (allItems.length <= 9) return;
+// Umumiy dinamik almashinuv funksiyasi (1- va 2-monitorlar uchun)
+function setupDynamicSwap(selector, allItems, visibleCount, intervalMs) {
+  var grids = document.querySelectorAll(selector);
+  if (!grids.length || allItems.length <= visibleCount) return;
 
   grids.forEach(function(grid) {
-    // Har bir ekran/preview uchun alohida holat saqlaymiz
-    var visibleItems = allItems.slice(0, 9);
-    var reserveItems = allItems.slice(9);
+    var visibleItems = allItems.slice(0, visibleCount);
+    var reserveItems = allItems.slice(visibleCount);
     var lastSlot = -1;
 
     setInterval(function() {
       var cards = grid.querySelectorAll(".menu-card");
-      if (cards.length < 9 || !reserveItems.length) return;
+      if (cards.length < visibleCount || !reserveItems.length) return;
 
       // Ketma-ket bir xil katak tushmasligi uchun random slot tanlaymiz
-      var slotIdx = Math.floor(Math.random() * 9);
+      var slotIdx = Math.floor(Math.random() * visibleCount);
       if (slotIdx === lastSlot) {
-        slotIdx = (slotIdx + 1) % 9;
+        slotIdx = (slotIdx + 1) % visibleCount;
       }
       lastSlot = slotIdx;
 
-      // Zaxiradagi ortib qolgan taomlardan navbatdagisini olamiz
       var incomingItem = reserveItems.shift();
       var outgoingItem = visibleItems[slotIdx];
 
@@ -158,14 +151,25 @@ function initDynamicMonitor1() {
 
         grid.replaceChild(newCard, targetCard);
 
-        // Yangi kartani silliq ko'rsatish
         setTimeout(function() {
           newCard.classList.remove("card-swapping");
         }, 50);
       }, 350);
 
-    }, 6000); // Har 6 soniyada almashadi (xohlasangiz 6000 ni o'zgartirishingiz mumkin)
+    }, intervalMs);
   });
+}
+
+function initDynamicMonitors() {
+  // 1-monitor: 9 ta ko'rinadi, qolgan 4 tasi har 6 soniyada almashadi
+  var m1Items = window.MENU.lavash.items
+    .concat(window.MENU.hotdog.items)
+    .concat(window.MENU.pitsa.items);
+  setupDynamicSwap('[data-dynamic-grid="monitor1"]', m1Items, 9, 6000);
+
+  // 2-monitor: 8 ta (4x2) ko'rinadi, ortib qolgan 1 tasi har 6 soniyada almashadi
+  var m2Items = window.MENU.burger.items;
+  setupDynamicSwap('[data-dynamic-grid="monitor2"]', m2Items, 8, 6000);
 }
 
 var MONITORS = { "1": monitor1, "2": monitor2, "3": monitor3 };
@@ -192,7 +196,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
   startClock("[data-clock]");
-  initDynamicMonitor1();
+  initDynamicMonitors();
   
   if ('wakeLock' in navigator) {
     requestWakeLock();
